@@ -8,9 +8,9 @@ Make sure the node.js is up to date:
 
 ## Compiler
 Compile TypeScript into JavaScript:  
-`ts sandbox.ts`  
+`tsc sandbox.ts`  
 Watch and compile TypeScript into JavaScript:  
-`ts sandbox.ts -w`
+`tsc sandbox.ts -w`
 
 ## Inference
 TypeScript tries to infer the type when possible.
