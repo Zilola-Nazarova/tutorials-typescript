@@ -12,6 +12,16 @@ Compile TypeScript into JavaScript:
 Watch and compile TypeScript into JavaScript:  
 `tsc sandbox.ts -w`
 
+## tsconfig
+Initializes config file:
+`tsc --init`
+Prevents from creating another 'src' folder:
+`"rootDir": "./src"`
+Places compiled files in 'public' folder:
+`"outDir": "./public"`
+Compiles only files in 'src' folder:
+`"include": ["src"]`
+
 ## Inference
 TypeScript tries to infer the type when possible.
 ```js
