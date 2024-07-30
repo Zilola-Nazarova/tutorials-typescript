@@ -45,3 +45,58 @@ ninja = {
 // error
 inja.skills = ['fighting', 'sneaking'];
 ```
+## Explicit Types
+We can declare variable type explicitly:
+```js
+let age: number;
+age = 'luigi'; // error
+age = 30; // valid
+```
+We can declare array element types explicitly:
+```ts
+let ninjas: string[] = [];
+ninjas.push('shaun'); // valid
+ninjas.push(5); // error
+ninjas = ['yoshi', 'mario']; // valid
+ninjas = [10, 23]; // error
+```
+We can declare object (object property) types explicitly:
+```ts
+// vast
+let ninjaOne: object;
+// can add/remove properties, then change property types
+ninjaOne = { name: 'yoshi', age: 30 };
+ninjaOne = []; // valid because array is a type of object
+ninjaOne = { name: 30, age: 'yoshi', beltColor: 'black' };
+// more accurate
+let ninjaTwo: {
+  name: string,
+  age: number,
+  beltColor: string
+};
+// can't add/remove properties, change property types
+ninjaTwo = { name: 'mario', age: 20, beltColor: 'black', skills: [] }; // error
+ninjaTwo = {}; // error
+ninjaTwo = { name: 'mario', age: 20 }; // error
+```
+### Union Types
+For variables:
+```ts
+let uid: string|number;
+// all valid
+uid = '123';
+uid = 123;
+```
+For array elements:
+```ts
+let mixed: (string|boolean)[] = [];
+// all valid 
+mixed.push('hello');
+mixed.push(true);
+```
+### Any Type
+Allows to change type (reverts ts). Use with caution.
+```ts
+let dynamic: any = 25;
+dynamic = true;
+```
