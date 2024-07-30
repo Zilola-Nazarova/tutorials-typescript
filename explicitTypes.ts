@@ -41,3 +41,25 @@ let ninjaTwo: {
 // ninjaTwo = { name: 'mario', age: 20 };
 ninjaTwo = { name: 'mario', age: 20, beltColor: 'black' };
 // ninjaTwo = { name: 'mario', age: 20, beltColor: 'black', skills: [] };
+
+// ANY TYPE
+let dynamic: any = 25;
+dynamic = true;
+console.log(dynamic);
+dynamic = 'hello';
+console.log(dynamic);
+dynamic = { name: 'luigi' };
+console.log(dynamic);
+
+let dynamicArray: any[] = [];
+dynamicArray.push(true);
+dynamicArray.push(5);
+dynamicArray.push('mario');
+console.log(dynamicArray);
+
+let dynamicNinja: { name: any, age: any };
+dynamicNinja = {
+  name: 5,
+  age: 'mario'
+};
+console.log(dynamicNinja);
