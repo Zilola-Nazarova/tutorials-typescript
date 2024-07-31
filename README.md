@@ -105,8 +105,49 @@ mixed.push('hello');
 mixed.push(true);
 ```
 ### Any Type
-Allows to change type (reverts ts). Use with caution.
+Allows to change type (reverts Typescript). Use with caution.
 ```ts
 let dynamic: any = 25;
 dynamic = true;
+```
+
+## Functions
+Typescript inferes function types:
+```ts
+let greet = () => { console.log('hello, world'); };
+greet = 'hello'; // error
+```
+We can set function type explicitly:
+```ts
+let greet: Function;
+greet = () => { console.log('hello, again'); };
+greet = 'hello'; // error
+```
+### Arguments
+We can set argument types:
+```ts
+const func1 = (a: number) => { console.log(a); };
+// argument of union type
+const func2 = (a: number | string) => { console.log(a); };
+// optional argument (undefined if not provided)
+const func3 = (a?: number | string) => { console.log(a); };
+// argument with default value
+// !should come after required args
+const func4 = (a: number | string = 5) => { console.log(a); };
+```
+Otherwise we get warning about 'any' type params.
+### Output
+Typescript inferes the type of the function output:
+```ts
+const minus = (a: number, b: number) => {
+  return a - b;
+};
+let result = minus(10, 7); // infernece => number
+result = 'minus'; // error
+```
+We can explicitly set the type of function output:
+```ts
+const minus = (a: number, b: number) : number => {
+  return a - b;
+};
 ```
