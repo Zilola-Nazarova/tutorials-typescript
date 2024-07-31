@@ -7,6 +7,8 @@ Make sure the node.js is up to date:
 4. Install latest stable version `nvm install --lts`
 
 ## Compiler
+Installation:
+`npm install -g typescript`
 Compile TypeScript into JavaScript:  
 `tsc sandbox.ts`  
 Watch and compile TypeScript into JavaScript:  
@@ -55,6 +57,7 @@ ninja = {
 // error
 inja.skills = ['fighting', 'sneaking'];
 ```
+
 ## Explicit Types
 We can declare variable type explicitly:
 ```js
@@ -151,6 +154,20 @@ const minus = (a: number, b: number) : number => {
   return a - b;
 };
 ```
+### Signatures
+We can explicitly set the type of function input/output (signature):
+```ts
+let logDetails: (obj: { name: string, age: number }) => void;
+type person = { name: string, age: number };
+logDetails = (ninja: person) /* the same input quantity/types */ => {
+  console.log(`${ninja.name} is ${ninja.age} years old`); // returns void (inference)
+};
+// the names of the inputs may differ
+let greet: (a: string, b: string) => void;
+greet = (name: string, greeting: string) => {
+  console.log(`${name} says ${greeting}`); // inference => void
+};
+```
 
 ## Type Aliases
 We can give names to custom types:
@@ -163,4 +180,26 @@ And reuse these types later:
 const greet = (user: objWithName) => {
   console.log(`${user.name} says hello`);
 };
+```
+
+## DOM & Type Casting
+The ! sign is used to indicate that the element exists in the DOM:
+```ts
+const anchor = document.querySelector('a');
+console.log(anchor.href); // warning that anchor might be null
+const anchor = document.querySelector('a')!;
+console.log(anchor.href); // no warning
+```
+Types Casting is required when element is selected not by element name:
+```ts
+// HTML element is selected by class
+// Typescript doesn't know the element name
+const form = document.querySelector('.new-item-form') as HTMLFormElement;
+```
+### Event Type
+```ts
+form.addEventListener('submit', (e: Event) => {
+  e.preventDefault();
+  // do something
+});
 ```
