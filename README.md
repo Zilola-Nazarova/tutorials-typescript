@@ -92,14 +92,14 @@ ninjaTwo = { name: 'mario', age: 20 }; // error
 ### Union Types
 For variables:
 ```ts
-let uid: string|number;
+let uid: string | number;
 // all valid
 uid = '123';
 uid = 123;
 ```
 For array elements:
 ```ts
-let mixed: (string|boolean)[] = [];
+let mixed: (string | boolean)[] = [];
 // all valid 
 mixed.push('hello');
 mixed.push(true);
@@ -149,5 +149,18 @@ We can explicitly set the type of function output:
 ```ts
 const minus = (a: number, b: number) : number => {
   return a - b;
+};
+```
+
+## Type Aliases
+We can give names to custom types:
+```ts
+type StringOrNum = string | number;
+type userObj = { name: string, uid: StringOrNum };
+```
+And reuse these types later:
+```ts
+const greet = (user: objWithName) => {
+  console.log(`${user.name} says hello`);
 };
 ```
