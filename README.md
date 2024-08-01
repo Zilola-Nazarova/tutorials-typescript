@@ -203,3 +203,128 @@ form.addEventListener('submit', (e: Event) => {
   // do something
 });
 ```
+
+## Classes
+```ts
+class Greeter {
+  greeting: string;
+ 
+  constructor(message: string) {
+    this.greeting = message;
+  }
+ 
+  greet() {
+    return "Hello, " + this.greeting;
+  }
+}
+ 
+let greeter = new Greeter("world");
+```
+### Access modifiers
+By default all class props are public.
+
+Public - can read/change from outside/inside:
+```ts
+class Invoice {
+  public client: string;
+
+  constructor(c: string) {
+    this.client = c;
+  }
+
+  changeClient() {
+    this.client = 'something else';
+  }
+
+  readClient() {
+    return `${this.client} ...`;
+  }
+}
+
+const inv = new Invoice('mario');
+
+inv.client = 'something else'; // ok
+console.log(inv.client); // ok
+inv.changeClient(); // ok
+inv.readClient(); // ok
+```
+Private - can read/change only from inside:
+```ts
+class Invoice {
+  private client: string;
+
+  constructor(c: string) {
+    this.client = c;
+  }
+
+  changeClient() {
+    this.client = 'something else';
+  }
+
+  readClient() {
+    return `${this.client} ...`;
+  }
+}
+
+const inv = new Invoice('mario');
+inv.client = 'something else'; // error
+console.log(inv.client); // error
+inv.changeClient(); // ok
+inv.readClient(); // ok
+```
+Readonly - can read from outside/inside, but can't change:
+```ts
+class Invoice {
+  readonly client: string;
+
+  constructor(c: string) {
+    this.client = c;
+  }
+
+  changeClient() {
+    this.client = 'something else'; // error
+  }
+
+  readClient() {
+    return `${this.client} ...`;
+  }
+}
+
+const inv = new Invoice('mario');
+inv.client = 'something else'; // error
+console.log(inv.client); // ok
+inv.changeClient(); // error
+inv.readClient(); // ok
+```
+
+### Constructor Shorthand
+We can declare properties inside the constructor if access modifiers provided for each property:
+```ts
+class Invoice {
+  readonly client: string;
+  private details: string;
+  public amount: number;
+
+  constructor(c: string, d: string, a: number) {
+    this.client = c;
+    this.details = d;
+    this.amount = a;
+  }
+}
+// the shorthand
+class Invoice {
+  constructor(
+    readonly client: string,
+    private details: string,
+    public amount: number
+  ) {}
+}
+// doesn't work without access modifiers
+class Invoice {
+  constructor(
+    client: string,
+    details: string,
+    amount: number
+  ) {}
+}
+```
