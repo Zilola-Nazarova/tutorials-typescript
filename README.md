@@ -319,7 +319,9 @@ class Invoice {
     public amount: number
   ) {}
 }
-// doesn't work without access modifiers
+```
+This feature doesn't work without access modifiers:
+```ts
 class Invoice {
   constructor(
     client: string,
@@ -327,4 +329,26 @@ class Invoice {
     amount: number
   ) {}
 }
+```
+
+## Modules
+When working with modules in TypeScript:
+1. compiles code that only modern browsers understand
+2. doesn't bundle modules into single file
+Webpack is be needed to solve this problem.
+
+Add a script with imports to HTML - add type "module":
+```html
+<script type="module" src='app.js'></script>
+```
+Export something in TypeScript:
+```ts
+export class Invoice {
+  // rest of the code
+}
+```
+Import something into TypeScript:
+```ts
+// import .js file (not .ts)
+import { Invoice } from './classes/invoice.js'; 
 ```
