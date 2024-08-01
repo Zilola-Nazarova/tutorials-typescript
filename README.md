@@ -352,3 +352,48 @@ Import something into TypeScript:
 // import .js file (not .ts)
 import { Invoice } from './classes/invoice.js'; 
 ```
+
+## Interfaces
+Interface inforces certain structure of the class/object. 
+```ts
+interface IsPerson {
+  name: string,
+  speak(a: string): void;
+}
+```
+We can't generate objects based on interface, but we can create objects of interface type.
+```ts
+const me: IsPerson = {
+  name: 'shaun',
+  speak(text: string): void {
+    console.log(text);
+  },
+};
+```
+We can enforce function arguments to match certain interface:
+```ts
+const greetPerson = (person: IsPerson) => {
+  console.log(`Hello ${person.name}`);
+};
+```
+We can enforce array elements to match certain interface:
+```ts
+let people: IsPerson[] = [];
+```
+The way to structure the code:
+```ts
+interface HasFormatter {
+  format(): string;
+}
+
+class Invoice implements HasFormatter {
+  // the rest of the code
+}
+
+let docOne: HasFormatter;
+
+docOne = new Invoice('yoshi', 'web work', 250);
+
+let docs: HasFormatter[] = [];
+docs.push(docOne);
+```
