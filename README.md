@@ -440,3 +440,21 @@ const doc: Resource<string[]> = {
   data: ['bread', 'milk', 'toilet roll']
 }
 ```
+
+## Enums
+Enums - special type that allows to store a set of constants/keywords and associate them with numeric values.
+```ts
+enum ResourceType { BOOK, AUTHOR, FILM, DIRECTOR, PERSON };
+
+interface Resource<T> {
+  uid: number;
+  resourceName: ResourceType; // allows to use enum
+  data: T;
+}
+
+const doc1: Resource<object> = {
+  uid: 1,
+  resourceName: ResourceType.AUTHOR, // becomes 1 (index of AUTHOR)
+  data: { name: 'shaun' }
+}
+```
