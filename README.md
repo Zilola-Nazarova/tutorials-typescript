@@ -397,3 +397,46 @@ docOne = new Invoice('yoshi', 'web work', 250);
 let docs: HasFormatter[] = [];
 docs.push(docOne);
 ```
+
+## Generics
+Generics allow us to provide a variety of types:
+```ts
+const addUID = <T>(obj: T) => {
+  let uid = Math.floor(Math.random() * 100);
+  return { ...obj, uid };
+}
+// string and objects are ok
+let doc1 = addUID({ name: 'yoshi', age: 40 });
+let doc2 = addUID('hello');
+// we can access props
+console.log(doc1.name);
+```
+Without generics we can't access properties of vague 'object' types:
+```ts
+const addUID = (obj: object) => {
+  let uid = Math.floor(Math.random() * 100);
+  return { ...obj, uid };
+}
+let doc = addUID({ name: 'yoshi', age: 40 });
+console.log(doc.name); // error
+```
+We can restrict the types to follow certain structure:
+```ts
+const addUID = <T extends { name: string }>(obj: T) => {
+  let uid = Math.floor(Math.random() * 100);
+  return { ...obj, uid };
+}
+```
+### Generics in Interfaces
+```ts
+interface Resource<T> {
+  uid: number;
+  resourceName: string;
+  data: T;
+}
+const doc: Resource<string[]> = {
+  uid: 2,
+  resourceName: 'shoppingList',
+  data: ['bread', 'milk', 'toilet roll']
+}
+```
