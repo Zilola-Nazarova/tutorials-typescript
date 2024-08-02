@@ -81,6 +81,7 @@ let ninjaOne: object;
 ninjaOne = { name: 'yoshi', age: 30 };
 ninjaOne = []; // valid because array is a type of object
 ninjaOne = { name: 30, age: 'yoshi', beltColor: 'black' };
+
 // more accurate
 let ninjaTwo: {
   name: string,
@@ -457,4 +458,16 @@ const doc1: Resource<object> = {
   resourceName: ResourceType.AUTHOR, // becomes 1 (index of AUTHOR)
   data: { name: 'shaun' }
 }
+```
+
+## Tuples
+Types of data in each position is fixed once initialized.
+```ts
+let student: [string, number];
+// we can't change types
+tup[0] = 5; // error
+tup[0] = 'shaun'; //ok
+// we can't change type order
+student = ['chun-li', 223423]; // ok
+student = [223423, 'chun-li']; // error
 ```
